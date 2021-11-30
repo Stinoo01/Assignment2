@@ -1,50 +1,49 @@
 #GC content of DNA sequence 
-def computeGC(sequence):
+def counterGC(sequence):
 
     #count G and C
-    def _helper(base):
+    def count(base):
         if base == "G" or base == "C":
             return 1
         else:
             return 0
 
     #sum G and C
-    GC_array = sum(map(_helper, sequence))
+    GC = sum(map(count, sequence))
 
     #doing percentage
-    return GC_array * 100.0 / len(sequence)
+    return GC * 100.0 / len(sequence)
 
 #use dictionary with {ID: sequence}
-def fastaDict(fasta):
+def fastaformat(fasta):
     #current ID
-    currentSeq = None
+    seq = None
     #creating dictionary 
     output = {}
     #creating fasta and update dictionary
-    for line in fasta:
-        if line.startswith(">"):
-            currentSeq = line.replace(">","")
-            output[currentSeq] = ""
+    for x in fasta:
+        if x.startswith(">"):
+            seq = x.replace(">","")
+            output[seq] = ""
         else:
-            output[currentSeq] += line
+            output[seq] += x
     # Return fasta dictionary
     return output
 
-#running code by defining fila sets 
-if __name__ == "__main__":
-    #read file
-    fasta_input = open("dati.txt","r").readlines()
+#open file 
+f = open("dati.txt","r").readlines()
 
-    #remove end of lines
-    fasta_input = list(map(lambda x: x.replace("\n",""), fasta_input))
+#remove end of line 
+f = list(map(lambda x: x.replace("\n",""), f))
 
-    #pass to the dictionary
-    fasta_dict = fastaDict(fasta_input)
+#pass to the dictionary
+fasta_dict = fastaformat(f)
 
-    #calculate GC 
-    gc_content = list(map(lambda x: (x[0], computeGC(x[1])), fasta_dict.items()))
+#calculate gc
+gc = list(map(lambda x: (x[0], counterGC(x[1])), fasta_dict.items()))
 
-    #sort by GC content
-    gc_content = sorted(gc_content, key=lambda x: -x[1])
-    #retinging highest value 
-    print("{0}\n{1:6f}".format(gc_content[0][0], gc_content[0][1]))
+#sort by gc content
+gc = sorted(gc, key=lambda x: -x[1])
+
+#retinging highest value 
+print("{0}\n{1:6f}".format(gc[0][0], gc[0][1]))
