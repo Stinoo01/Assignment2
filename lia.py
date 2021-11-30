@@ -1,9 +1,9 @@
 import math    
 #input data        
-# k< or == to 7                                                        
+#k is < or == to 7                                                        
 k = 6                                                                          
 n = 17      
-# n is < that P (2^k)                                                                    
+# n is < than P (2^k)                                                                    
 P = 2**k                     
 #setting probability (final output) == 0                                                  
 probability = 0                                                                
