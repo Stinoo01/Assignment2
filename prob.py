@@ -24,11 +24,11 @@ def calcProb(gc, seq):
 
 #take log of calcProb
 #use 3 decimla points 
-gcCons = f[1].split( )
-finalProbs = []
-for i in gcCons:
-    rawProb = calcProb(float(i), f[0])
-    finalProbs.append("%.3f" % math.log10(rawProb))
+gc = f[1].split( )
+final_ = []
+for x in gc:
+    final = calcProb(float(x), f[0])
+    final_.append("%.3f" % math.log10(final))
 
 #print result spaced
-print(" ".join(finalProbs))
+print(" ".join(final_))
