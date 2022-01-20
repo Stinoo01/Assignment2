@@ -4,7 +4,10 @@ f = open('dati.txt', 'r')
 #creating dictionary
 dictionary = {}
 n = 0
-
+"""
+I solved this problem before the FAsta format from biopython
+so in order to handle fasta i searched and found this way that works
+"""
 for line in f:
     if '>' in line:
         id_seq = line.strip()[1:]
@@ -15,11 +18,13 @@ for line in f:
         
 n = len(list(dictionary.values())[0])
 
+#bases
 bases = {"A" : [],
          "C" : [],
          "G" : [],
          "T" : []}
 
+#count for each base 
 for x in range(n):
         bases['A'].append(0) 
         bases['C'].append(0)                 
@@ -29,7 +34,8 @@ for x in range(n):
 for x in range(n):
     for key in dictionary.keys():
         bases[dictionary[key][x]][x]+=1
-        
+
+#store firs output 
 list_ = []
 
 for x in range(n):
@@ -41,10 +47,14 @@ for x in range(n):
             max_base = key
     list_.append(max_base)
     
+#output
+#first output
 print("".join(list_))
 
+#second output
 for key in bases.keys():
-    print("%s:" % key, end="")
+    #print bases plus :
+    print(key + ":", end='') #to be on the same line of the other output
     for x in range (n):
          print(" ", bases[key][x], end="")
     print()
